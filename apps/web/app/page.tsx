@@ -1,5 +1,8 @@
 import Image, { type ImageProps } from "next/image";
 import styles from "./page.module.css";
+import { generateCSSVariables } from "dynawind";
+
+// mock https://mocki.io/v1/3d4be87a-17f9-41f4-a232-7401072eb6b7
 
 type Props = Omit<ImageProps, "src"> & {
   srcLight: string;
