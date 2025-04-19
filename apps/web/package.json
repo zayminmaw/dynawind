@@ -11,10 +11,13 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
+    "@tailwindcss/postcss": "^4.1.4",
     "dynawind": "*",
     "next": "^15.2.1",
+    "postcss": "^8.5.3",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "tailwindcss": "^4.1.4"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
