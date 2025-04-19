@@ -8,7 +8,7 @@
     "dev": "tsup --watch"
   },
   "peerDependencies": {
-    "tailwindcss": "^3.0.0"
+    "tailwindcss": "^4.0.0"
   },
   "files": [
     "dist"
