@@ -5,7 +5,8 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "test": "jest"
   },
   "peerDependencies": {
     "tailwindcss": "^4.0.0"
@@ -32,7 +33,15 @@
   "license": "ISC",
   "description": "Dynawind is a dynamic, flexible theme system for Tailwind CSS that leverages the power of CSS variables. With full support for server-side rendering (SSR) and API-based theming, Dynawind allows you to create adaptable, user-specific themes that update on the fly.",
   "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "ts-jest": "^29.3.2",
     "tsup": "^8.4.0",
     "typescript": "^5.8.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zayminmaw/dynawind.git"
   }
 }
