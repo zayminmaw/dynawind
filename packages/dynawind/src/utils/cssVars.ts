@@ -83,3 +83,20 @@ export function generateCSSVariables(scope: string, theme: Theme): string {
     .map(([key, value]) => `--${scope}-${key}: ${value};`)
     .join(" ");
 }
+
+/**
+ * Wraps an array of CSS variable declarations in a `:root` block.
+ *
+ * This is useful for generating global CSS variables that can be applied
+ * across an entire document or application.
+ *
+ * @param cssVars - An array of CSS variable strings (e.g., '--color: red;').
+ * @returns A single string containing the variables wrapped inside a `:root` block.
+ *
+ * @example
+ * wrapInRoot(['--primary: #000;', '--secondary: #fff;']);
+ * // Returns ':root { --primary: #000; --secondary: #fff; }'
+ */
+export function wrapInRoot(cssVars: string[]): string {
+  return `:root { ${cssVars.join(" ")} }`;
+}

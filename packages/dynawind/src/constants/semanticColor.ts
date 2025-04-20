@@ -1,3 +1,5 @@
+// This is a default color mapping helper for CSS variables.
+// Feel free to override or define your own based on your design system.
 export default {
   primary: "var(--color-primary)",
   "primary-foreground": "var(--color-primary-foreground)",
