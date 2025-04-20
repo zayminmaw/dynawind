@@ -4,7 +4,7 @@ import { generateCSSVariables } from "dynawind";
 
 export default function Home() {
   return (
-    <div className="bg-red-300">
+    <div className="bg-primary">
       <div className="text-xl text-black">hello</div>
     </div>
   );
