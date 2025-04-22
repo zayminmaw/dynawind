@@ -23,11 +23,11 @@ export const baseOptions: BaseLayoutProps = {
       </>
     ),
   },
-  links: [
-    {
-      text: "Documentation",
-      url: "/docs",
-      active: "nested-url",
-    },
-  ],
+  // links: [
+  //   {
+  //     text: "Documentation",
+  //     url: "/docs",
+  //     active: "nested-url",
+  //   },
+  // ],
 };
