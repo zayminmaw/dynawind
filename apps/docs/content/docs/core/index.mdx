@@ -1,4 +1,123 @@
 ---
 title: Core
-description: Dynamic theming system for Tailwind CSS using CSS variables.
+description: Explore core utilities of dynawind.
 ---
+
+Utility functions for applying and generating scoped CSS variables for theming.
+
+## `generateSemanticColorCSSVariables`
+
+Generates scoped CSS variable declarations for a color theme.
+
+```ts
+generateSemanticColorCSSVariables(theme: Theme): string
+```
+
+### Parameters
+
+- `theme`: `Theme` — An object mapping semantic color keys to CSS values.
+
+### Returns
+
+A string of CSS custom properties in the format `--color-<key>: <value>;`.
+
+### Example
+
+```ts
+generateSemanticColorCSSVariables({ primary: "#000", secondary: "#fff" });
+// => "--color-primary: #000; --color-secondary: #fff;"
+```
+
+---
+
+## `applySemanticColorThemeToRoot`
+
+Applies a color theme directly to the `<html>` element using CSS custom properties.
+
+```ts
+applySemanticColorThemeToRoot(theme: Theme): void
+```
+
+### Parameters
+
+- `theme`: `Theme` — Color theme variables.
+
+### Example
+
+```ts
+applySemanticColorThemeToRoot({ primary: "#000", secondary: "#fff" });
+// Sets --color-primary and --color-secondary on <html>
+```
+
+---
+
+## `applyThemeToRoot`
+
+Applies any scoped theme to the root of the document.
+
+```ts
+applyThemeToRoot(scope: string, theme: Theme): void
+```
+
+### Parameters
+
+- `scope`: `string` — Prefix used for the CSS variables (e.g., `color`, `typography`).
+- `theme`: `Theme` — Key-value pairs of CSS variables.
+
+### Example
+
+```ts
+applyThemeToRoot("color", { primary: "#000", secondary: "#fff" });
+// Sets --color-primary and --color-secondary on <html>
+```
+
+---
+
+## `generateCSSVariables`
+
+Converts a theme object into scoped CSS variable declarations.
+
+```ts
+generateCSSVariables(scope: string, theme: Theme): string
+```
+
+### Parameters
+
+- `scope`: `string` — The variable namespace.
+- `theme`: `Theme` — CSS variable mappings.
+
+### Returns
+
+A string of scoped CSS variables.
+
+### Example
+
+```ts
+generateCSSVariables("color", { primary: "#000", secondary: "#fff" });
+// => "--color-primary: #000; --color-secondary: #fff;"
+```
+
+---
+
+## `wrapInRoot`
+
+Wraps multiple CSS variables in a `:root` block.
+
+```ts
+wrapInRoot(cssVars: string[]): string
+```
+
+### Parameters
+
+- `cssVars`: `string[]` — An array of CSS variable declarations.
+
+### Returns
+
+A single CSS string wrapped in `:root`.
+
+### Example
+
+```ts
+wrapInRoot(["--primary: #000;", "--secondary: #fff;"]);
+// => ":root { --primary: #000; --secondary: #fff; }"
+```
