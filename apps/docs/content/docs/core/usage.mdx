@@ -3,4 +3,185 @@ title: Usage
 description: Examples of how to use our core utilities.
 ---
 
-[[WIP]]
+This guide uses Next.js for demonstration purposes.
+Before using our framework, ensure you have configured your Tailwind CSS setup correctly.
+
+In particular, we will showcase the most common use case: **semantic color theming.**
+
+## 1. Set up utilities in your global CSS file
+
+First, initialize the utilities in your project's global CSS file.
+This will allow you to dynamically control your theme variables throughout your app.
+
+```css
+@import "tailwindcss";
+
+@layer utilities {
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+  .text-primary {
+    color: var(--color-primary);
+  }
+  .border-primary {
+    border-color: var(--color-primary);
+  }
+  .ring-primary {
+    --tw-ring-color: var(--color-primary);
+  }
+
+  .bg-primary-foreground {
+    background-color: var(--color-primary-foreground);
+  }
+  .text-primary-foreground {
+    color: var(--color-primary-foreground);
+  }
+
+  .bg-secondary {
+    background-color: var(--color-secondary);
+  }
+  .text-secondary {
+    color: var(--color-secondary);
+  }
+  .border-secondary {
+    border-color: var(--color-secondary);
+  }
+  .ring-secondary {
+    --tw-ring-color: var(--color-secondary);
+  }
+
+  .text-secondary-foreground {
+    color: var(--color-secondary-foreground);
+  }
+
+  .bg-muted {
+    background-color: var(--color-muted);
+  }
+  .text-muted {
+    color: var(--color-muted);
+  }
+  .text-muted-foreground {
+    color: var(--color-muted-foreground);
+  }
+
+  .bg-accent {
+    background-color: var(--color-accent);
+  }
+  .text-accent {
+    color: var(--color-accent);
+  }
+  .text-accent-foreground {
+    color: var(--color-accent-foreground);
+  }
+
+  .bg-destructive {
+    background-color: var(--color-destructive);
+  }
+  .text-destructive {
+    color: var(--color-destructive);
+  }
+  .text-destructive-foreground {
+    color: var(--color-destructive-foreground);
+  }
+
+  .bg-background {
+    background-color: var(--color-background);
+  }
+  .text-foreground {
+    color: var(--color-foreground);
+  }
+
+  .border-border {
+    border-color: var(--color-border);
+  }
+  .border-input {
+    border-color: var(--color-input);
+  }
+
+  .ring-ring {
+    --tw-ring-color: var(--color-ring);
+  }
+}
+```
+
+## 2. Apply the dynamic theme in your `layout.tsx`
+
+Next, integrate your dynamic theme into your app’s root layout.
+We will fetch the theme, generate the necessary CSS variables, and inject them into the `<head>` of the document.
+
+```ts
+// app/layout.tsx
+
+import "./globals.css";
+import { generateSemanticColorCSSVariables, Theme, wrapInRoot } from "dynawind";
+
+async function getTheme(): Promise<Theme> {
+  const res = await fetch(
+    "https://mocki.io/v1/57cc3eea-6662-44ac-891d-66e5d1bc7cca",
+    {
+      cache: "no-store",
+    }
+  );
+  return res.json();
+}
+
+export default async function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  const theme = await getTheme();
+  const semanticColorCssVars = generateSemanticColorCSSVariables(theme);
+
+  return (
+    <html lang="en">
+      <head>
+        <style
+          dangerouslySetInnerHTML={{
+            __html: wrapInRoot([semanticColorCssVars]),
+          }}
+        />
+      </head>
+      <body>
+        {children}
+      </body>
+    </html>
+  );
+}
+```
+
+Notes:
+
+- `generateSemanticColorCSSVariables(theme)` takes the fetched theme and generates semantic CSS variables automatically.
+  If you need more control over how CSS variables are generated, use the lower-level `generateCSSVariables` function instead.
+- `wrapInRoot` ensures the CSS variables are scoped to the :root.
+
+## 3. Use semantic colors in your components
+
+Now you can use your semantic color tokens directly in your components with Tailwind utility classes.
+
+For example, using `bg-primary` to apply the primary background color:
+
+```ts
+// app/page.tsx
+
+export default function Home() {
+  return (
+    <div className="bg-primary">
+      <div className="text-xl text-black">
+        hello, world
+      </div>
+    </div>
+  );
+}
+```
+
+Notes:
+
+- `bg-primary` refers to the `--color-primary` CSS variable you defined dynamically.
+- You can extend this system to use multiple semantic tokens like `bg-secondary`, `text-primary`, etc., depending on your theme configuration.
+
+## Summary
+
+By using dynamic theming with SSR (Server-Side Rendering), you gain full control over your app’s theme at runtime without relying on client-side JavaScript.
+Because the theme is generated and injected on the server, there is no visible color shift or flash during page load, resulting in a smoother and more consistent user experience.
