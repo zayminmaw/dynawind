@@ -11,7 +11,7 @@ describe("applyThemeToRoot", () => {
     setPropertySpy.mockRestore();
   });
 
-  it("should apply CSS custom properties to the root element", () => {
+  it("should apply CSS custom properties to the root element with scope", () => {
     const theme = {
       primary: "#000",
       secondary: "#fff",
@@ -32,10 +32,23 @@ describe("applyThemeToRoot", () => {
 
     expect(setPropertySpy).not.toHaveBeenCalled();
   });
+
+  it("should apply CSS custom properties to the root element without scope", () => {
+    const theme = {
+      primary: "#000",
+      secondary: "#fff",
+    };
+    const scope = null;
+
+    applyThemeToRoot(scope, theme);
+
+    expect(setPropertySpy).toHaveBeenCalledWith("--primary", "#000");
+    expect(setPropertySpy).toHaveBeenCalledWith("--secondary", "#fff");
+  });
 });
 
 describe("generateCSSVariables", () => {
-  it("should generate correct CSS variables for a theme", () => {
+  it("should generate correct CSS variables for a theme with scope", () => {
     const theme = {
       primary: "#000",
       secondary: "#fff",
@@ -75,6 +88,18 @@ describe("generateCSSVariables", () => {
       "--typography-fontSize: 16px; --typography-fontFamily: Arial, sans-serif;"
     );
     expect(colorResult).toBe("--color-primary: #000; --color-secondary: #fff;");
+  });
+
+  it("should generate correct CSS variables without scope", () => {
+    const theme = {
+      primary: "#000",
+      secondary: "#fff",
+    };
+    const scope = null;
+
+    const result = generateCSSVariables(scope, theme);
+
+    expect(result).toBe("--primary: #000; --secondary: #fff;");
   });
 });
 

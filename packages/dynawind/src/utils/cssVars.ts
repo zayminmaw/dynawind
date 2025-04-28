@@ -38,49 +38,79 @@ export function applySemanticColorThemeToRoot(theme: Theme): void {
 }
 
 /**
- * Applies a scoped CSS theme to the root element (`<html>`) by setting custom properties.
+ * Applies a CSS theme to the root element (`<html>`) by setting custom properties,
+ * optionally scoped with a namespace.
  *
  * Each key-value pair in the `theme` object is converted into a CSS variable with the format:
- * `--<scope>-<key>` and applied to the `document.documentElement`.
+ * - With scope: `--<scope>-<key>`
+ * - Without scope: `--<key>`
+ * and applied to `document.documentElement`.
  *
- * @param {string} scope - A namespace for the theme variables (e.g., "color", "typography").
+ * @param {string | null | undefined} scope - An optional namespace for the theme variables (e.g., "color", "typography").
+ * If null or undefined, variables will not be scoped.
  * @param {Theme} theme - An object representing theme properties where keys are CSS variable names
  *                        (without the leading `--`) and values are the corresponding CSS values.
  *
  * @example
  * applyThemeToRoot('color', {
- *   'primary': '#000',
- *   'secondary': '#fff'
+ *   primary: '#000',
+ *   secondary: '#fff'
  * });
- * // Sets --color-primary: #000; and --color-secondary: #fff on the root element
+ * // Sets --color-primary: #000; and --color-secondary: #fff; on the root element
+ *
+ * @example
+ * applyThemeToRoot(null, {
+ *   primary: '#000',
+ *   secondary: '#fff'
+ * });
+ * // Sets --primary: #000; and --secondary: #fff; on the root element
  */
-export function applyThemeToRoot(scope: string, theme: Theme): void {
+export function applyThemeToRoot(
+  scope: string | null | undefined,
+  theme: Theme
+): void {
   const root = document.documentElement;
   Object.entries(theme).forEach(([key, value]) => {
-    root.style.setProperty(`--${scope}-${key}`, value);
+    root.style.setProperty(scope ? `--${scope}-${key}` : `--${key}`, value);
   });
 }
 
 /**
- * Generates a string of scoped CSS variable declarations from a theme object.
+ * Generates a string of CSS variable declarations from a theme object, optionally scoped by a namespace.
  *
  * Each key-value pair is transformed into a CSS custom property with the format:
- * `--<scope>-<key>: <value>;`, which can be used directly in a `<style>` tag or a stylesheet.
+ * - With scope: `--<scope>-<key>: <value>;`
+ * - Without scope: `--<key>: <value>;`
  *
- * @param {string} scope - A namespace for the theme variables (e.g., "color", "typography").
+ * This string can be used directly in a `<style>` tag or a stylesheet.
+ *
+ * @param {string | null | undefined} scope - An optional namespace for the theme variables (e.g., "color", "typography").
+ * If null or undefined, variables will not be scoped.
  * @param {Theme} theme - An object representing theme variables and their corresponding values.
  * @returns {string} A string of CSS custom property declarations.
  *
  * @example
  * generateCSSVariables('color', {
- *   'primary': '#000',
- *   'secondary': '#fff'
+ *   primary: '#000',
+ *   secondary: '#fff'
  * });
  * // Returns: "--color-primary: #000; --color-secondary: #fff;"
+ *
+ * @example
+ * generateCSSVariables(null, {
+ *   primary: '#000',
+ *   secondary: '#fff'
+ * });
+ * // Returns: "--primary: #000; --secondary: #fff;"
  */
-export function generateCSSVariables(scope: string, theme: Theme): string {
+export function generateCSSVariables(
+  scope: string | null | undefined,
+  theme: Theme
+): string {
   return Object.entries(theme)
-    .map(([key, value]) => `--${scope}-${key}: ${value};`)
+    .map(([key, value]) =>
+      scope ? `--${scope}-${key}: ${value};` : `--${key}: ${value};`
+    )
     .join(" ");
 }
 
