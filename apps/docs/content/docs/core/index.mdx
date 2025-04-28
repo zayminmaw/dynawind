@@ -53,15 +53,15 @@ applySemanticColorThemeToRoot({ primary: "#000", secondary: "#fff" });
 
 ## `applyThemeToRoot`
 
-Applies any scoped theme to the root of the document.
+Applies a scoped or unscoped theme to the root of the document.
 
 ```ts
-applyThemeToRoot(scope: string, theme: Theme): void
+applyThemeToRoot(scope: string | null | undefined, theme: Theme): void
 ```
 
 ### Parameters
 
-- `scope`: `string` — Prefix used for the CSS variables (e.g., `color`, `typography`).
+- `scope`: `string | null | undefined` — Optional prefix used for the CSS variables (e.g., `color`, `typography`). If `null` or `undefined`, variables are unscoped.
 - `theme`: `Theme` — Key-value pairs of CSS variables.
 
 ### Example
@@ -69,32 +69,38 @@ applyThemeToRoot(scope: string, theme: Theme): void
 ```ts
 applyThemeToRoot("color", { primary: "#000", secondary: "#fff" });
 // Sets --color-primary and --color-secondary on <html>
+
+applyThemeToRoot(null, { primary: "#000", secondary: "#fff" });
+// Sets --primary and --secondary on <html>
 ```
 
 ---
 
 ## `generateCSSVariables`
 
-Converts a theme object into scoped CSS variable declarations.
+Converts a theme object into scoped or unscoped CSS variable declarations.
 
 ```ts
-generateCSSVariables(scope: string, theme: Theme): string
+generateCSSVariables(scope: string | null | undefined, theme: Theme): string
 ```
 
 ### Parameters
 
-- `scope`: `string` — The variable namespace.
+- `scope`: `string | null | undefined` — Optional namespace for the variables. If `null` or `undefined`, variables are generated without a scope.
 - `theme`: `Theme` — CSS variable mappings.
 
 ### Returns
 
-A string of scoped CSS variables.
+A string of scoped or unscoped CSS variables.
 
 ### Example
 
 ```ts
 generateCSSVariables("color", { primary: "#000", secondary: "#fff" });
 // => "--color-primary: #000; --color-secondary: #fff;"
+
+generateCSSVariables(null, { primary: "#000", secondary: "#fff" });
+// => "--primary: #000; --secondary: #fff;"
 ```
 
 ---
