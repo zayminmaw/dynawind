@@ -1,0 +1,45 @@
+{
+  "name": "@dynawind/react",
+  "version": "0.1.0",
+  "private": false,
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "dependencies": {
+    "dynawind": "*"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.4.0"
+  },
+  "author": "Zay Min Maw",
+  "description": "Dynawind React wraps the Dynawind core into an easy-to-use React integration, enabling dynamic, flexible Tailwind CSS theming with the power of CSS variables. It supports server-side rendering (SSR) and API-based theming out of the box, making it simple to build adaptive, user-specific themes that update instantly across your React apps.",
+  "license": "ISC",
+  "keywords": [
+    "react",
+    "nextjs",
+    "tailwindcss",
+    "theme",
+    "dynamic theming",
+    "css variables",
+    "tailwind theme",
+    "tailwind plugin",
+    "tailwind customization",
+    "server-side rendering",
+    "SSR",
+    "API-based theming",
+    "design system",
+    "tailwind dynamic theme",
+    "custom tailwind theme"
+  ]
+}
