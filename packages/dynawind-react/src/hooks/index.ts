@@ -1,0 +1,1 @@
+export { useDynamicTheme } from "./useDynamicTheme";

@@ -2,7 +2,7 @@ import { createContext } from "react";
 import { DynamicThemeProviderProps } from "./types";
 import { Theme } from "dynawind";
 
-const DynamicThemeContext = createContext<Theme>({});
+export const DynamicThemeContext = createContext<Theme | undefined>(undefined);
 
 const DynamicThemeProvider = ({
   children,
