@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { generateSemanticColorCSSVariables, Theme, wrapInRoot } from "dynawind";
+import { DynamicThemeProvider } from "@dynawind/react";
+import ClientSideThemeProvider from "./clientSideThemeProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -19,7 +21,7 @@ export const metadata: Metadata = {
 
 async function getTheme(): Promise<Theme> {
   const res = await fetch(
-    "https://mocki.io/v1/57cc3eea-6662-44ac-891d-66e5d1bc7cca",
+    "https://mocki.io/v1/b26cb236-10c1-4976-b63b-5a1a38de138e",
     {
       cache: "no-store",
     }
@@ -45,7 +47,9 @@ export default async function RootLayout({
         />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+        <ClientSideThemeProvider theme={theme}>
+          {children}
+        </ClientSideThemeProvider>
       </body>
     </html>
   );

@@ -13,6 +13,7 @@
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.4",
     "dynawind": "*",
+    "@dynawind/react": "*",
     "next": "^15.2.1",
     "postcss": "^8.5.3",
     "react": "^19.1.0",
