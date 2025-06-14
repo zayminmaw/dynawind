@@ -1,5 +1,5 @@
 {
-  "name": "@dynawind/react",
+  "name": "dynawind-react",
   "version": "1.0.0",
   "private": false,
   "main": "dist/index.js",
@@ -44,7 +44,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/zayminmaw/dynawind.git"
+    "url": "git+https://github.com/zayminmaw/dynawind.git"
   },
   "homepage": "https://dynawind-docs.vercel.app"
 }
