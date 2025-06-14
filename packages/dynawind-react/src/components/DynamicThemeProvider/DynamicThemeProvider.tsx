@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext } from "react";
 import { DynamicThemeProviderProps } from "./types";
 import { Theme } from "dynawind";
