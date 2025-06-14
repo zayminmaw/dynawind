@@ -1,6 +1,6 @@
 // "use client";
 
-import { useDynamicTheme } from "@dynawind/react";
+// import { useDynamicTheme } from "@dynawind/react";
 
 // mock https://mocki.io/v1/3d4be87a-17f9-41f4-a232-7401072eb6b7
 

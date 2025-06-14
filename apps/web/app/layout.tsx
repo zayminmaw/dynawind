@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { generateSemanticColorCSSVariables, Theme, wrapInRoot } from "dynawind";
-import { DynamicThemeProvider } from "@dynawind/react";
 import ClientSideThemeProvider from "./clientSideThemeProvider";
 
 const geistSans = localFont({
